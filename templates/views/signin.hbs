@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script
+      src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"
+      defer
+    ></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
+      defer
+    ></script>
+</head>
+<body>
+    {{>navbar}}
+    <div class="container">
+        <h1 class="reg">Login yourself</h1>
+        <form id="signin">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required><br>
+
+            <button class="btn">Sign in</button>
+            
+        </form>
+    </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const firebaseConfig = {
+            apiKey: "AIzaSyB8EaesyYNe4b8DztU8iPhVwcofJUzngqY",
+            authDomain: "signup-signin-36afa.firebaseapp.com",
+            projectId: "signup-signin-36afa",
+            storageBucket: "signup-signin-36afa.appspot.com",
+            messagingSenderId: "229983537198",
+            appId: "1:229983537198:web:7305d8830243e15f9af7bf",
+            measurementId: "G-YBP6C9EN97"
+        };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+
+
+          document
+            .getElementById("signin")
+            .addEventListener("submit", (event) => {
+                event.preventDefault();
+              const email = event.target.email.value;
+              const password = event.target.password.value;
+
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(({ user }) => {
+                  return user.getIdToken().then((idToken) => {
+                    return fetch("/sessionLogin", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                      },
+                      body: JSON.stringify({ idToken }),
+                    });
+                  });
+                })
+                .then(() => {
+                  return firebase.auth().signOut();
+                })
+                .then(() => {
+                  window.location.assign("/profile");
+                });
+              return false;
+            });
+
+    
+        });
+      </script>
+</body>
+</html>
