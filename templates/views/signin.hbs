@@ -24,13 +24,12 @@
     <div class="container">
         <h1 class="reg">Login yourself</h1>
         <form id="signin">
+            <p class="error"></p>
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" required><br>
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required><br>
-
-            <button class="btn">Sign in</button>
-            
+            <center><button class="btn">Sign in</button></center>           
         </form>
     </div>
     <script>
@@ -78,7 +77,9 @@
                 })
                 .then(() => {
                   window.location.assign("/profile");
-                });
+                }).catch((err) => {
+            document.querySelector(".error").innerHTML = err.message;
+          })
               return false;
             });
 

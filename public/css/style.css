@@ -20,22 +20,28 @@ nav ul li a{
     font-family: cursive;
 }
 nav ul li a:hover{
-    color: rgb(255, 255, 255);
+    color: rgb(250, 250, 250);
 }
 
 /* HOME PAGE STYLING */
 div.box{
     height: 50vh;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    background-color: rgb(151, 191, 192);
+    margin: 6rem auto;
+    box-shadow: 10px 11px 11px #264f5080;
+}
+div.box h2 a:hover{
+    color: rgb(250, 250, 250);
 }
 
 
 /* Register  and login page styling */
 div.container{
-    background-color: rgb(151, 191, 192);
     background-color: rgb(151, 191, 192);
     width: 50%;
     margin: auto;
@@ -48,18 +54,25 @@ div.container h1.reg{
     font-family: fantasy;
     padding-top: 3.5rem;
 }
- form{
-     
+ form{     
     max-width: 68%;
     margin: 3.2rem auto;
     font-size: 1.2em;
     font-family: cursive;
     font-weight: 600;
  }
+ form p.error{
+     background-color: rgb(250, 250, 133);
+     font-size: 1rem;
+     margin-bottom: 0.3rem;
+     font-weight: normal;
+     text-align: center;
+ }
  form input{
     line-height: 1.4rem;
     font-size: 1.2rem;
     margin: 0.5rem;
+    padding: .1rem 0.2rem;
  }
 
  .btn{
@@ -80,10 +93,14 @@ div.container h1.reg{
 
  div.profile{
      display: flex;
-     height: 60vh;
+     height: 40vh;
+     width: 40vw;
      flex-direction: column;
      align-items: center;
      justify-content: space-evenly;
+     background-color: rgb(151, 191, 192);
+     margin: 8rem auto;
+     box-shadow: 10px 11px 11px #264f5080;
  }
  div.profile a button {
     margin: 1.6rem 0.5rem;
